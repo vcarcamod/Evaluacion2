@@ -1,0 +1,14 @@
+<%@page import="cl.anfp.models.Usuario"%>
+<%
+
+String nombreCompleto = "";
+if(session.getAttribute("usuario") == null){
+    response.sendRedirect("./?msjNok=Acceso restringido");
+}else{
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    nombreCompleto = usuario.getNombre() + " " + usuario.getApellido();
+}
+%>
+<form name="formLogout" id="formLogout" action="UsuarioController" method="post">
+    <input type="hidden" name="accion" value="logout">
+</form>

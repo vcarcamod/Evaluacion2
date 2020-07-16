@@ -1,0 +1,70 @@
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Agregar nuevo Equipo</h4>
+        </div>
+        <div class="modal-body">
+          <form action="./EquipoController" method="post">
+                <input type="hidden" name="accion" value="agregar">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre del Equipo">
+                </div>
+                <div class="form-group">
+                    <label for="procedencia">Procedencia</label>
+                    <select id="procedencia" name="procedencia" class="form-control" placeholder="Ciudad de Procedencia">
+                        <option>Seleccionar ciudad</option>
+                        <%
+                        CiudadesDAO cd = new CiudadesDAO();
+                        ArrayList<Ciudad> ciudades = cd.obtenerCiudades();
+                        for(Ciudad ciudad : ciudades){
+                            %>
+                            <option value="<%= ciudad.getCodigo()%>"><%= ciudad.getNombre() %></option>
+                            <%
+                        }
+                        %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="estadio">Estadio</label>
+                    <select id="estadio" name="estadio" class="form-control" placeholder="Estadio del equipo">
+                        <option>Seleccionar Estadio</option>
+                        <%
+                        EstadiosDAO estd = new EstadiosDAO();
+                        ArrayList<Estadio> estadios = estd.obtenerEstadios();
+                        for(Estadio estadio : estadios){
+                            %>
+                            <option value="<%= estadio.getCodigo()%>"><%= estadio.getNombre() %></option>
+                            <%
+                        }
+                        %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="division">División</label>
+                    <select id="division" name="division" class="form-control" placeholder="División del equipo">
+                        <option>Seleccionar División</option>
+                        <%
+                        DivisionesDAO dd = new DivisionesDAO();
+                        ArrayList<Division> divisiones = dd.obtenerDivisiones();
+                        for(Division division : divisiones){
+                            %>
+                            <option value="<%= division.getCodigo()%>"><%= division.getNombre() %></option>
+                            <%
+                        }
+                        %>
+                    </select>
+                </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" id="btnGuardar" class="btn btn-success" value="Guardar">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </form>
+        </div>
+      </div>
+
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<div id="myModalEditar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modificar Estadio</h4>
+        </div>
+        <div class="modal-body">
+          <form action="./EstadioController" method="post">
+                <input type="hidden" name="accion" value="modificar">
+                <input type="hidden" id="edit_id" name="id" value="">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input id="edit_nombre" type="text" class="form-control" name="nombre" placeholder="Nombre del Estadio">
+                </div>
+                <div class="form-group">
+                    <label for="ciudad">Ciudad</label>
+                    <select id="edit_ciudad" name="ciudad" class="form-control" placeholder="Nombre del Estadio">
+                        <option>Seleccionar ciudad</option>
+                        <%
+                        CiudadesDAO cdm = new CiudadesDAO();
+                        ArrayList<Ciudad> ciudadesm = cdm.obtenerCiudades();
+                        for(Ciudad ciudadm : ciudadesm){
+                            %>
+                            <option value="<%= ciudadm.getCodigo()%>"><%= ciudadm.getNombre() %></option>
+                            <%
+                        }
+                        %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Capacidad</label>
+                    <input id="edit_capacidad" type="number" class="form-control" name="capacidad" placeholder="Capacidad de personas">
+                </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" id="btnGuardar" class="btn btn-success" value="Guardar">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </form>
+        </div>
+      </div>
+
+    </div>
+</div>

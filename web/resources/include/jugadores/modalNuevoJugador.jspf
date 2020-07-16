@@ -1,0 +1,68 @@
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Agregar nuevo Jugador</h4>
+        </div>
+        <div class="modal-body">
+          <form action="./JugadorController" method="post">
+                <input type="hidden" name="accion" value="agregar">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre del Jugador">
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input id="apellido" type="text" class="form-control" name="apellido" placeholder="Apellido del Jugador">
+                </div>
+                <div class="form-group">
+                    <label for="fec_nacimiento">Fecha de Nacimiento</label>
+                    <input id="fec_nacimiento" type="text" class="form-control" name="fec_nacimiento" placeholder="DD/MM/AAAA">
+                </div>
+                <div class="form-group">
+                    <label for="posicion">Posición</label>
+                    <select id="posicion" name="posicion" class="form-control" placeholder="Posición del Jugador">
+                        <option>Seleccionar posición</option>
+                        <%
+                        PosicionesDAO pd = new PosicionesDAO();
+                        ArrayList<Posicion> posiciones = pd.obtenerPosiciones();
+                        for(Posicion posicion : posiciones){
+                            %>
+                            <option value="<%= posicion.getCodigo()%>"><%= posicion.getNombre() %></option>
+                            <%
+                        }
+                        %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="equipo">Equipo</label>
+                    <select id="equipo" name="equipo" class="form-control" placeholder="Equipo del Jugador">
+                        <option>Seleccionar Equipo</option>
+                        <%
+                        EquiposDAO eqd = new EquiposDAO();
+                        ArrayList<Equipo> equipos = eqd.obtenerEquipos();
+                        for(Equipo equipo : equipos){
+                            %>
+                            <option value="<%= equipo.getCodigo()%>"><%= equipo.getNombre() %></option>
+                            <%
+                        }
+                        %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sueldo_anual_clp">Sueldo Anual</label>
+                    <input id="sueldo_anual_clp" type="number" class="form-control" name="sueldo_anual_clp" placeholder="Sueldo anual en pesos">
+                </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" id="btnGuardar" class="btn btn-success" value="Guardar">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
